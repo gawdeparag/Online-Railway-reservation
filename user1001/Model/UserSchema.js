@@ -3,14 +3,7 @@ const bcrypt = require('bcrypt');
 
 const userSch = new mongoose.Schema({
 
-    name: {
-        type: String,
-        required: [true, 'Enter full name']
-    },
-
-    Age: { type: Number },
-
-    Email: {
+    email: {
         type: String,
         required: [true, 'Enter your email'],
         unique: true,
@@ -26,5 +19,4 @@ const userSch = new mongoose.Schema({
     Mobileno: { type: Number }
 });
 
-
-module.exports = mongoose.model('Passenger', userSch);
+module.exports = mongoose.model('users', userSch);

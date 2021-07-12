@@ -1,8 +1,6 @@
 var express = require('express');
 var mongoose = require('mongoose');
-
 var router = express.Router();
-
 var trainSchema = require('../Model/TrainSchema');
 
 router.use(express.json());
@@ -53,7 +51,6 @@ console.log('TrainDB connected');
  */
 
 router.get('/', function (req, res) {
-
     trainSchema.find().then((trainSchema) => {
         res.json(trainSchema)
     }).catch(err => {
@@ -65,29 +62,21 @@ router.get('/', function (req, res) {
     });
 });
 
-
-
-
 /**
  * @swagger
- *  /admin/post-train-details:
- *    post:
- *     summary: Creates a new train.
- *     consumes:
- *       - application/json
- *     parameters:
- *       - in: body
- *         name: train
- *         description: The train to create.
- *         schema:
- *           $ref: '#/definitions/trains'     
- *    responses:
- *        200:
- *          description: OK
- */
-
-
-//UpdateNewTrain
+ * /post-train-details:
+ *   post:
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object                      
+ *     responses:
+ *       200:
+ *         description: Returns the requested user
+ * 
+*/
+//Update New Train
 router.post('/post-train-details', (req, res) => {
     trainSchema.create(req.body).then((newTrain) => {
         res.send(newTrain)
@@ -98,6 +87,15 @@ router.post('/post-train-details', (req, res) => {
             res.status(200).send("error")
         }
     });
+});
+
+//Find Train By Name
+router.get('/train-name', async (req, res) => {
+       //trainSchema.find({$and:[{TrainSrc: req.query.TrainSrc},{TrainDes: req.query.TrainDes}]})
+        console.log(req.query);
+        const user = await trainSchema.find(req.query)
+        console.log(user)
+        res.json(user)
 });
 
 /** 
@@ -116,10 +114,7 @@ router.post('/post-train-details', (req, res) => {
  *              description: A successful response
  */
 
-
-//Find Train By ID
 router.get('/:id', (req, res) => {
-
     trainSchema.findById(req.params.id).then((trainSchema) => {
 
         if (trainSchema) {
@@ -127,7 +122,6 @@ router.get('/:id', (req, res) => {
         } else {
             res.sendStatus(404)
         }
-
     }).catch(err => {
         if (err) {
             throw err;
@@ -158,11 +152,9 @@ router.get('/:id', (req, res) => {
 
 //Find By ID & Update
 router.put('/:id', (req, res, next) => {
-    trainSchema.findByIdAndUpdate({
-        _id: req.params.id
-    }, req.body).then((reposnse) =>
-        res.send(response)).catch((err) => console.log(err));
-    res.send(req.body);
+    trainSchema.findByIdAndUpdate({_id: req.params.id}, req.body).then((response) =>{
+        res.send(response)
+    }).catch((err) => console.log(err));
 });
 
 
@@ -178,11 +170,12 @@ router.put('/:id', (req, res, next) => {
      *     responses:
      *       200:
      *         description: Returns the requested admin
-     */
- router.delete('/:id', function(req, res) {
-    trains.findByIdAndDelete(req.params.id).then(() => {
-        res.send('Train deleted')
+*/
 
+//Find By ID & Delete
+ router.delete('/:id', function(req, res) {
+    trainSchema.findByIdAndDelete(req.params.id).then(() => {
+        res.send('Train deleted')
     }).catch(err => {
         if (err) {
             res.sendStatus(404);
