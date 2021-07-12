@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 
 const userSch = new mongoose.Schema({
 
+
     email: {
         type: String,
         required: [true, 'Enter your email'],
@@ -18,5 +19,6 @@ const userSch = new mongoose.Schema({
 
     Mobileno: { type: Number }
 });
+
 
 module.exports = mongoose.model('users', userSch);

@@ -62,6 +62,8 @@ router.get('/', function (req, res) {
     });
 });
 
+
+
 /**
  * @swagger
  * /post-train-details:
@@ -76,6 +78,8 @@ router.get('/', function (req, res) {
  *         description: Returns the requested user
  * 
 */
+
+
 //Update New Train
 router.post('/post-train-details', (req, res) => {
     trainSchema.create(req.body).then((newTrain) => {
@@ -88,6 +92,7 @@ router.post('/post-train-details', (req, res) => {
         }
     });
 });
+
 
 //Find Train By Name
 router.get('/train-name', async (req, res) => {
@@ -114,6 +119,8 @@ router.get('/train-name', async (req, res) => {
  *              description: A successful response
  */
 
+
+//Find Train By ID
 router.get('/:id', (req, res) => {
     trainSchema.findById(req.params.id).then((trainSchema) => {
 
@@ -152,9 +159,11 @@ router.get('/:id', (req, res) => {
 
 //Find By ID & Update
 router.put('/:id', (req, res, next) => {
-    trainSchema.findByIdAndUpdate({_id: req.params.id}, req.body).then((response) =>{
-        res.send(response)
-    }).catch((err) => console.log(err));
+    trainSchema.findByIdAndUpdate({
+        _id: req.params.id
+    }, req.body).then((reposnse) =>
+        res.send(response)).catch((err) => console.log(err));
+    res.send(req.body);
 });
 
 
@@ -170,12 +179,13 @@ router.put('/:id', (req, res, next) => {
      *     responses:
      *       200:
      *         description: Returns the requested admin
-*/
+ */
 
 //Find By ID & Delete
  router.delete('/:id', function(req, res) {
-    trainSchema.findByIdAndDelete(req.params.id).then(() => {
+    trains.findByIdAndDelete(req.params.id).then(() => {
         res.send('Train deleted')
+
     }).catch(err => {
         if (err) {
             res.sendStatus(404);

@@ -2,8 +2,6 @@ var express = require('express');
 var trains = require('./routes/traindetails');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
-
-
 var app = express();
 app.use('/admin',trains);
 
@@ -30,6 +28,4 @@ const swaggerOptions = {
     
     const swaggerDocs = swaggerJsDoc(swaggerOptions);
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-
-    module.exports = app;
-
+    module.exports = app

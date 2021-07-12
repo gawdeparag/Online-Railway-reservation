@@ -1,12 +1,15 @@
 var express = require('express');
-var user = require('./Routes/user');
+var trains = require('./routes/traindetails');
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-var app = express();
-app.use('/', user);
 
-app.listen(1001, ()=>{console.log("server activated " + 1001)});
+var app = express();
+app.use('/admin',trains);
+
+
+
+app.listen(1000, ()=>{console.log("server activated at " + 1000)});
 
 // Extended: http://swagger.io/specification/#infoObject
 const swaggerOptions = {
@@ -18,14 +21,15 @@ const swaggerOptions = {
     contact: {
     name: 'OnkarK'
     },
-    servers: ["http://localhost:1001"]
+    servers: ["http://localhost:1000"]
     }
     },
-    apis: ['routes/*js']
+    apis: ['routes/TrainDetails.js']
+    
     };
     
     const swaggerDocs = swaggerJsDoc(swaggerOptions);
     app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-    //console.log(swaggerDocs)
 
-    module.exports  = app;
+    module.exports = app;
+
