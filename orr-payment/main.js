@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
-const PORT = 5000;
+const PORT = 5001;
 
 app.listen(PORT, () => {
-    console.log(`Booking-service started at ${PORT}`);
+    console.log(`Payment-service started at ${PORT}`);
 });
