@@ -31,7 +31,7 @@ const swaggerOptions = {
 const swaggerDocs = swaggerJSDoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 
-const dbURI = "mongodb+srv://paragg:paragg@cluster0.0nwkr.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const dbURI = "mongodb+srv://paragg:paragg@cluster0.0nwkr.mongodb.net/orr-train?retryWrites=true&w=majority";
 mongoose.connect(dbURI, {
     useNewUrlParser: true,
     useFindAndModify: false,

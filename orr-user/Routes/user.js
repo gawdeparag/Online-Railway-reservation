@@ -6,15 +6,6 @@ var UserSchema = require("../Model/UserSchema");
 //var TrainSchema = require("../../admin1000/Model/TrainSchema");
 router.use(express.json());
 
-var dbURI = "mongodb+srv://OnkarK:731998@cluster0.09ywx.mongodb.net/AuthDB?retryWrites=true&w=majority";
-mongoose.connect(dbURI, {
-    useNewUrlParser: true,
-    useFindAndModify: false,
-    useUnifiedTopology: true,
-    useCreateIndex: true,
-});
-console.log("TrainDB connected");
-
 /**
  *  @swagger
  *  /{id}:
